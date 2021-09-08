@@ -1,0 +1,36 @@
+{
+    "$schema": "http://json.schemastore.org/tsconfig",
+    "angularCompilerOptions": {
+        "disableTypeScriptVersionCheck": true
+    },
+    "compileOnSave": false,
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "downlevelIteration": true,
+        "target": "ES5",
+        "module": "ES6",
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "removeComments": true,
+        "sourceMap": true,
+        "diagnostics": true,
+        "rootDir": "./",
+        "strictNullChecks": true,
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "lib": [
+            "es2015",
+            "es2019",
+            "dom"
+        ],
+        "baseUrl": "./src",
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "skipLibCheck": true,
+        "resolveJsonModule": true
+    },
+    "include": [
+        "src/**/*.ts"
+    ]
+}
