@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const readPoFiles = require('./read-po-files');
 const path = require('path');
 const fs = require('fs');

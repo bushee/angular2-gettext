@@ -1,6 +1,6 @@
 {
     "name": "ng-gettext",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Gettext implementation for angular.",
     "repository": {
         "type": "git",
@@ -9,6 +9,10 @@
     "license": "MIT",
     "peerDependencies": {
         "@angular/core": ">=8.2.11"
+    },
+    "dependencies": {
+        "pofile": "1.1.1",
+        "yargs": "17.1.1"
     },
     "devDependencies": {
         "@angular-devkit/build-ng-packagr": "0.803.25",
@@ -21,12 +25,10 @@
         "codelyzer": "6.0.1",
         "eslint": "6.6.0",
         "ng-packagr": "9.1.3",
-        "pofile": "1.1.1",
         "prettier": "2.2.1",
         "tslint": "5.20.0",
         "tslint-config-prettier": "1.18.0",
-        "typescript": "3.8.3",
-        "yargs": "17.1.1"
+        "typescript": "3.8.3"
     },
     "bin": {
         "gettext-build-translations": "./util/build-translations.js"
