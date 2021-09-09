@@ -46,7 +46,7 @@ Arguments:
 <gettext-translate [key]="'Message text ' + id"></gettext-translate> <!-- takes resolved string, e.g. "Message text 1" as translation key -->
 
 <!-- interpolation -->
-<gettext-translate key="You've got [[number]] messages" [interpolations]="{number: 3}"></gettext-translate> <!-- interpolates "3" into translated "You've got [[number]] messages" text
+<gettext-translate key="You've got [[number]] messages" [interpolations]="{number: 3}"></gettext-translate> <!-- interpolates "3" into translated "You've got [[number]] messages" text -->
 ```
 
 ### Pipe
@@ -55,7 +55,7 @@ Arguments:
 #### Example
 ```html
 {{ 'You\'ve got a message' | gettextTranslate }} <!-- simply translates "You've got a message" -->
-{{ 'You've got [[number]] messages' | gettextTranslate:{number: 3} }} <!-- interpolates "3" into translated "You've got [[number]] messages" text
+{{ 'You've got [[number]] messages' | gettextTranslate:{number: 3} }} <!-- interpolates "3" into translated "You've got [[number]] messages" text -->
 ```
 
 ### Service
