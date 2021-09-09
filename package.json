@@ -1,6 +1,6 @@
 {
     "name": "ng-gettext",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Gettext implementation for angular.",
     "repository": {
         "type": "git",
