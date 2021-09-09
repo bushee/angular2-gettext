@@ -1,6 +1,6 @@
 {
     "name": "ng-gettext",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Gettext implementation for angular.",
     "repository": {
         "type": "git",
@@ -29,7 +29,7 @@
         "yargs": "17.1.1"
     },
     "bin": {
-        "gettext-build-translations": "node ./util/build-translations.js"
+        "gettext-build-translations": "./util/build-translations.js"
     },
     "scripts": {
         "build": "ng build",
