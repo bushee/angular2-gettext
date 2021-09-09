@@ -16,7 +16,9 @@ export class GettextService {
 
     public constructor(@Optional() translationsCache?: TranslationsCache) {
         if (translationsCache) {
-            translationsCache.cache.forEach(({ language, strings }) => this.setTranslations(language, strings));
+            translationsCache.forEach(cache =>
+                cache.forEach(({ language, strings }) => this.setTranslations(language, strings))
+            );
         }
     }
 

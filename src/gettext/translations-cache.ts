@@ -1,6 +1,6 @@
-export abstract class TranslationsCache {
-    public cache: Array<{
-        language: string;
-        strings: Record<string, string>;
-    }>;
-}
+export abstract class TranslationsCache extends Array<SingleTranslationsCache> {}
+
+export type SingleTranslationsCache = Array<{
+    language: string;
+    strings: Record<string, string>;
+}>;
