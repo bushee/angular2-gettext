@@ -1,4 +1,4 @@
-export abstract class TranslationsCache extends Array<SingleTranslationsCache> {}
+export abstract class TranslationsCache {}
 
 export type SingleTranslationsCache = Array<{
     language: string;
