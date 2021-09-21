@@ -1,5 +1,5 @@
-import { Inject, Injectable } from '@angular/core';
-import { SingleTranslationsCache, TranslationsCache } from '../translations-cache';
+import { Injectable, Optional } from '@angular/core';
+import { TranslationsCache } from '../translations-cache';
 
 @Injectable()
 export class GettextService {
@@ -14,7 +14,7 @@ export class GettextService {
     private debugPrefix = '[MISSING] ';
     private debugSuffix = '';
 
-    public constructor(@Inject(TranslationsCache) translationsCache: SingleTranslationsCache[]) {
+    public constructor(@Optional() translationsCache?: TranslationsCache) {
         if (translationsCache) {
             translationsCache
                 .filter(cache => cache && cache.forEach)
