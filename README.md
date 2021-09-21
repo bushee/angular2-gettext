@@ -12,19 +12,21 @@ For now, pluralization and contexts are not implemented.
 ### Module
 You may simply import `GettextModule` into your angular application.
 
-If you wish to initialize translations cache before any unit uses it, provide `TranslationsCache` **multi** value in your dependency injection container:
+If you wish to initialize translations cache before any unit uses it, just feed `GettextService` with `TranslationsCache` on module construction:
 
 ```typescript
-import { GettextModule, TranslationsCache } from 'ng-gettext';
+import { NgModule } from '@angular/core';
+import { GettextModule, GettextService } from 'ng-gettext';
 import translationsCache from './translations-cache';
 
 @NgModule({
-    imports: [GettextModule],
-    providers: [
-        { provide: TranslationsCache, useValue: translationsCache, multi: true }
-    ]
+    imports: [GettextModule]
 })
-export class MyModule {}
+export class MyModule {
+    public constructor(gettextService: GettextService) {
+        gettextService.setTranslations(translationsCache);
+    }
+}
 ```
                                `
 #### Preparing translations cache
@@ -32,7 +34,7 @@ Use `node_modules/.bin/gettext-build-translations` script to compile cache from 
 
 Arguments:
 - `--input directory` - path (cwd-relative or absolute) to directory containing `.po` files. May be passed multiple times.
-- `--output file` - path to file to be generated. This will be a `.ts` file containing a default export of type `SingleTranslationsCache` (single entry of multi `TranslationsCache` provider).
+- `--output file` - path to file to be generated. This will be a `.ts` file containing a default export of type `TranslationsCache`.
 
 ### Component
 `<gettext-translate>` component is provided. It has following arguments:

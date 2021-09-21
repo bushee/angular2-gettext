@@ -1,4 +1,4 @@
-import { Injectable, Optional } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { TranslationsCache } from '../translations-cache';
 
 @Injectable()
@@ -13,14 +13,6 @@ export class GettextService {
     private debugMode = false;
     private debugPrefix = '[MISSING] ';
     private debugSuffix = '';
-
-    public constructor(@Optional() translationsCache?: TranslationsCache) {
-        if (translationsCache) {
-            translationsCache
-                .filter(cache => cache && cache.forEach)
-                .forEach(cache => cache.forEach(({ language, strings }) => this.setTranslations(language, strings)));
-        }
-    }
 
     public setDebugMode(enable: boolean, prefix?: string, suffix?: string): void {
         this.debugMode = enable;
@@ -68,10 +60,22 @@ export class GettextService {
         this.currentLanguageTranslations = this.translations[language] || {};
     }
 
-    public setTranslations(language: string, translations: Record<string, string>): void {
-        this.translations[language] = { ...this.translations[language], ...translations };
-        if (language === this.currentLanguage) {
-            this.currentLanguageTranslations = this.translations[language] || {};
+    public setTranslations(translationsCache: TranslationsCache): void;
+    public setTranslations(language: string, translations: Record<string, string>): void;
+    public setTranslations(
+        languageOrTranslationsCache: string | TranslationsCache,
+        translations?: Record<string, string>
+    ): void {
+        if (typeof languageOrTranslationsCache === 'string') {
+            this.translations[languageOrTranslationsCache] = {
+                ...this.translations[languageOrTranslationsCache],
+                ...translations
+            };
+            if (languageOrTranslationsCache === this.currentLanguage) {
+                this.currentLanguageTranslations = this.translations[languageOrTranslationsCache] || {};
+            }
+        } else {
+            languageOrTranslationsCache.forEach(({ language, strings }) => this.setTranslations(language, strings));
         }
     }
 }

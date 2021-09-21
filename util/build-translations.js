@@ -30,8 +30,8 @@ readPoFiles(args.input)
                         '/* tslint:disable */\n\n' +
                         '// this file is generated automatically\n' +
                         '// do not edit it manually\n\n' +
-                        "// @ts-ignore\nimport {SingleTranslationsCache} from 'ng-gettext';\n\n" +
-                        `// @ts-ignore\nconst translationsCache: SingleTranslationsCache = ${JSON.stringify(
+                        "// @ts-ignore\nimport {TranslationsCache} from 'ng-gettext';\n\n" +
+                        `// @ts-ignore\nconst translationsCache: TranslationsCache = ${JSON.stringify(
                             translations
                         )};\n` +
                         '// @ts-ignore\nexport default translationsCache;'
