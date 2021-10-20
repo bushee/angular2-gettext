@@ -7,12 +7,15 @@ export class GettextService {
     private currentLanguage: string;
     private currentLanguageTranslations: Record<string, string> = {};
 
-    private interpolationPrefix = '[[';
-    private interpolationSuffix = ']]';
+    private interpolationRegex: RegExp;
 
     private debugMode = false;
     private debugPrefix = '[MISSING] ';
     private debugSuffix = '';
+
+    public constructor() {
+        this.setInterpolationMarkers('[[', ']]');
+    }
 
     public setDebugMode(enable: boolean, prefix?: string, suffix?: string): void {
         this.debugMode = enable;
@@ -25,8 +28,7 @@ export class GettextService {
     }
 
     public setInterpolationMarkers(prefix: string, suffix: string): void {
-        this.interpolationPrefix = prefix;
-        this.interpolationSuffix = suffix;
+        this.interpolationRegex = new RegExp(this.escapeRegex(prefix) + '(.+?)' + this.escapeRegex(suffix), 'g');
     }
 
     public getString(key: string, interpolations?: Record<string, unknown>): string {
@@ -39,13 +41,9 @@ export class GettextService {
         }
 
         if (interpolations) {
-            return Object.keys(interpolations).reduce(
-                (translation: string, replacement: string) =>
-                    translation.replace(
-                        `${this.interpolationPrefix}${replacement}${this.interpolationSuffix}`,
-                        interpolations[replacement] as string
-                    ),
-                translatedString
+            return translatedString.replace(
+                this.interpolationRegex,
+                (_, replacement) => interpolations[replacement] as string
             );
         }
         return translatedString;
@@ -77,5 +75,10 @@ export class GettextService {
         } else {
             languageOrTranslationsCache.forEach(({ language, strings }) => this.setTranslations(language, strings));
         }
+    }
+
+    // SO FTW https://stackoverflow.com/a/6969486
+    private escapeRegex(string: string): string {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     }
 }
